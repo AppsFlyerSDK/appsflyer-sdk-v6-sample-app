@@ -1,0 +1,16 @@
+PODS:
+  - appsflyer-apple-sdk-qa (6.0.0.159)
+
+DEPENDENCIES:
+  - appsflyer-apple-sdk-qa (= 6.0.0.159)
+
+SPEC REPOS:
+  trunk:
+    - appsflyer-apple-sdk-qa
+
+SPEC CHECKSUMS:
+  appsflyer-apple-sdk-qa: 95017d8e8274b033be4d1779c00975464c8b2ecd
+
+PODFILE CHECKSUM: 3a5965af311733d0faf4804bc10270c414bbaefd
+
+COCOAPODS: 1.9.3
