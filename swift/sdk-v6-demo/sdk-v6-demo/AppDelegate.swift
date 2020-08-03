@@ -9,6 +9,7 @@
 import UIKit
 import AppTrackingTransparency
 import AppsFlyerLib
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,6 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // iOS 10 or later
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { _, _ in }
+            application.registerForRemoteNotifications()
+        }
+        // iOS 9 support - Given for reference. This demo app supports iOS 13 and above
+        else {
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+        
         return true
     }
     
@@ -50,8 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Start the SDK (start the IDFA timeout set above, for iOS 14 or later)
         AppsFlyerLib.shared().start()
     }
-
-    
+            
     // Open Univerasal Links
     
     // For Swift version < 4.2 replace function signature with the commented out code
