@@ -13,27 +13,34 @@ Using AppsFlyer SDK 6.0 beta is a key way for you to prepare for iOS 14. The SDK
 
 When the application initialises in iOS 14:
 
-![idfa_menu](https://user-images.githubusercontent.com/61788924/89154579-cd429380-d56f-11ea-96be-0a39e2bf1350.png)
+<img src="https://user-images.githubusercontent.com/61788924/89154579-cd429380-d56f-11ea-96be-0a39e2bf1350.png" alt="idfa_menu" width="320" />
 
 This code shows a menu that requests the user to authorise IDFA collection.
 
 ```swift
+// The following block is for applications wishing to collect IDFA.
+// for iOS 14 and above - The user will be prompted for permission to collect IDFA.
+//                        If permission granted, the IDFA will be collected by the SDK.
+// for iOS 13 and below - The IDFA will be collected by the SDK. The user will NOT be prompted for permission.
 if #available(iOS 14, *) {
-            AppsFlyerLib.shared().waitForAdvertisingIdentifier(withTimeoutInterval: 60)
-            ATTrackingManager.requestTrackingAuthorization { (status) in
-            }
-        }
+    // Set a timeout for the SDK to wait for the IDFA collection before handling app launch
+    AppsFlyerLib.shared().waitForAdvertisingIdentifier(withTimeoutInterval: 60)
+    // Show the user the Apple IDFA consent dialog (AppTrackingTransparency)
+    // Can be called in any place
+    ATTrackingManager.requestTrackingAuthorization { (status) in
+    }
+}
 ```
+[Get code here](https://github.com/AppsFlyerSDK/appsflyer-sdk-v6-sample-app/blob/b76d334a7dd757bcf19485c87a184df2b2d7a370/swift/sdk-v6-demo/sdk-v6-demo/AppDelegate.swift#L41-L47)
 
 In the app you have a button '**Test IDFA collection**'
 
 #### If user authorised IDFA collection, its IDFA will be displayed
-
-![idfa_ok](https://user-images.githubusercontent.com/61788924/89153007-bfd7da00-d56c-11ea-8b04-1763bd184a5f.png)
+<img src="https://user-images.githubusercontent.com/61788924/89153007-bfd7da00-d56c-11ea-8b04-1763bd184a5f.png" alt="idfa_ok" width="350" />
 
 #### If user DID NOT authorise IDFA collection, a message will be displayed
 
-![idfa_not_allowed](https://user-images.githubusercontent.com/61788924/89152971-acc50a00-d56c-11ea-9198-6b3af746be10.png)
+<img src="https://user-images.githubusercontent.com/61788924/89152971-acc50a00-d56c-11ea-9198-6b3af746be10.png" alt="idfa_not_allowed" width="350" />
 
 ## Why is the demo app asking me to allow notifications?
 
