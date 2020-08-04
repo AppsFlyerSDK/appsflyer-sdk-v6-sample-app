@@ -36,7 +36,7 @@ if #available(iOS 14, *) {
 In the app you have a button '**Test IDFA collection**'
 
 #### If user authorised IDFA collection, its IDFA will be displayed
-<img src="https://user-images.githubusercontent.com/61788924/89153007-bfd7da00-d56c-11ea-8b04-1763bd184a5f.png" alt="idfa_ok" width="350" />
+<img src="https://user-images.githubusercontent.com/61788924/89342813-ff591000-d6ab-11ea-9a90-2cae9810794b.png" alt="idfa_ok" width="350" />
 
 #### If user DID NOT authorise IDFA collection, a message will be displayed
 
