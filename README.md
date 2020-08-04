@@ -35,6 +35,10 @@ In the app you have a button '**Test IDFA collection**'
 
 ![idfa_not_allowed](https://user-images.githubusercontent.com/61788924/89152971-acc50a00-d56c-11ea-9198-6b3af746be10.png)
 
+## Why is the demo app asking me to allow notifications?
+
+The notifcations are used for the uninstall detection flow
+
 ## How to use this demo?
 
 1. Clone the repository
