@@ -34,15 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //  Set isDebug to true to see AppsFlyer debug logs
         AppsFlyerLib.shared().isDebug = true      
         
-        // The following block is for applications wishing to collect IDFA.
-        // for iOS 14 and above - The user will be prompted for permission to collect IDFA.
-        //                        If permission granted, the IDFA will be collected by the SDK.
-        // for iOS 13 and below - The IDFA will be collected by the SDK. The user will NOT be prompted for permission.
+        // The following block is optional for applications wishing to give users the option to block IDFA collection.
+        // for iOS 14 and above - The user may be prompted to block IDFA collection.
+        //                        If user opts-out, the IDFA will not be collected by the SDK.
+        // for iOS 13 and below - The IDFA will be collected by the SDK. The user will NOT be prompted to block collection.
         if #available(iOS 14, *) {
             // Set a timeout for the SDK to wait for the IDFA collection before handling app launch
-            AppsFlyerLib.shared().waitForAdvertisingIdentifier(withTimeoutInterval: 60)
+            // If timeout expires before user asks to block IDFA collection, the IDFA will be collected.
+            AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
             // Show the user the Apple IDFA consent dialog (AppTrackingTransparency)
-            // Can be called in any place
+            // MUST be called here before start() in order to prevent IDFA collection by the SDK
             ATTrackingManager.requestTrackingAuthorization { (status) in
             }
         }
