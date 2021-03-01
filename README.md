@@ -1,21 +1,21 @@
 ![image](https://user-images.githubusercontent.com/61788924/89123513-9f5e4000-d4d8-11ea-9025-653c9f290ed8.png)
 
-# **Welcome to AppsFlyer SDK 6.0**
+# **Welcome to AppsFlyer SDK 6.x**
 
->‼️ The sample app was changed following [Apple's announcement](https://developer.apple.com/news/?id=hx9s63c5) to postpone IDFA limitations in iOS 14
+>‼️ The sample app is cmpatible with the IDFA limitations in iOS 14.5
 
-iOS 14 allows the user to prevent collection of his IDFA when the application start. 
+iOS 14.5 blocks the collection of IDFA unless the user allows ita collection when the application starts. 
 
 AppsFlyer's SDK - starting of version 6.0.3 - supports this functionality using Apple's AppTrackingTransperancy framework. 
 
 This sample app will allow you to test this functionality and ensure that your app is running smoothly ahead of the release of iOS 14.
 
 ## Compatability
-- **iOS version >= 10**
+- **iOS version >= 10.0**
 
-- **AppsFlyer SDK version 6.0.3**
+- **AppsFlyer SDK version 6.0.3 (current installed SDK is 6.2.2)**
 
-## How do I test block of IDFA collection?
+## How do I test consent to collect of IDFA?
 
 When the application initialises in iOS 14:
 
@@ -24,16 +24,16 @@ When the application initialises in iOS 14:
 This code shows a menu that requests the user to authorise IDFA collection.
 
 ```swift
-// The following block is optional for applications wishing to give users the option to block IDFA collection.
-// for iOS 14 and above - The user may be prompted to block IDFA collection.
-//                        If user opts-out, the IDFA will not be collected by the SDK.
-// for iOS 13 and below - The IDFA will be collected by the SDK. The user will NOT be prompted to block collection.
+// The following block is optional for applications wishing to give users the option to collect IDFA.
+// for iOS 14 and above - The user may be prompted to collect IDFA.
+//                        If user opts-in, the IDFA will be collected by the SDK.
+// for iOS 13 and below - The IDFA will be collected by the SDK. The user will NOT be prompted to consent.
 if #available(iOS 14, *) {
   // Set a timeout for the SDK to wait for the IDFA collection before handling app launch
-  // If timeout expires before user asks to block IDFA collection, the IDFA will be collected.
+  // If timeout expires before the user allows to collect IDFA , the IDFA will NOT be collected.
   AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
   // Show the user the Apple IDFA consent dialog (AppTrackingTransparency)
-  // MUST be called here before start() in order to prevent IDFA collection by the SDK
+  // MUST be called here before start() in order to allow IDFA collection by the SDK
   ATTrackingManager.requestTrackingAuthorization { (status) in
                                                  }
 }
